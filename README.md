@@ -1,8 +1,7 @@
 # Bare-Metal-Driver-Library
 1. Commented out HAL includes in main.h (Line 30)
-2. Inlcudes for error handles are in a separate header file which I have not linked here. (@Koushik should I include them?)
-3. Commented out HAL_init() from main.c (Line 73)
-4. Missing files:
+2. Commented out HAL_init() from main.c (Line 73)
+3. Leftout files:
 stm32l4xx_hal_conf.h
 stm32l4xx_hal_msp.c
 stm32l4xx_it.h
