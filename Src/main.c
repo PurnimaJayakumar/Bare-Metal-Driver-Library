@@ -103,7 +103,30 @@ int main(void)
   * @brief System Clock Configuration
   * @retval None
   */
+void SystemClock_Config(void)
+{
+    /* 1. Enable HSI */
+    RCC->CR |= RCC_CR_HSION;
 
+    /* 2. Wait until HSI ready */
+    while(!(RCC->CR & RCC_CR_HSIRDY));
+
+    /* 3. Select HSI as SYSCLK */
+    RCC->CFGR &= ~RCC_CFGR_SW;      // clear clock switch bits
+    RCC->CFGR |= RCC_CFGR_SW_HSI;   // select HSI
+
+    /* 4. Wait until switch completed */
+    while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI);
+
+    /* 5. Set AHB prescaler = 1 */
+    RCC->CFGR &= ~RCC_CFGR_HPRE;
+
+    /* 6. Set APB1 prescaler = 1 */
+    RCC->CFGR &= ~RCC_CFGR_PPRE1;
+
+    /* 7. Set APB2 prescaler = 1 */
+    RCC->CFGR &= ~RCC_CFGR_PPRE2;
+}
 
 /* USER CODE BEGIN 4 */
 
