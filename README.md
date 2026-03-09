@@ -6,4 +6,4 @@ stm32l4xx_hal_conf.h
 stm32l4xx_hal_msp.c
 stm32l4xx_it.h
 stm32l4xx_it.c
-ClockConfig made into register level in main.c
+4. ClockConfig made into register level in main.c
