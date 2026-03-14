@@ -1,25 +1,59 @@
 #include "gpio.h"
 
-/* Initialize GPIO pin */
-void GPIO_Init(GPIO_TypeDef *port, uint8_t pin, uint8_t mode)
+/*
+ * Initialize GPIO pin
+ */
+void GPIO_Init(GPIO_TypeDef *port,
+               uint8_t pin,
+               uint8_t mode,
+               uint8_t otype,
+               uint8_t pull,
+               uint8_t speed)
 {
-    // Implementation will be added later
+    /* Configure pin mode */
+
+    port->MODER &= ~(3 << (2 * pin));      // Clear mode bits
+    port->MODER |= (mode << (2 * pin));    // Set mode
+
+    /* Configure output type */
+
+    port->OTYPER &= ~(1 << pin);
+    port->OTYPER |= (otype << pin);
+
+    /* Configure speed */
+
+    port->OSPEEDR &= ~(3 << (2 * pin));
+    port->OSPEEDR |= (speed << (2 * pin));
+
+    /* Configure pull-up/pull-down */
+
+    port->PUPDR &= ~(3 << (2 * pin));
+    port->PUPDR |= (pull << (2 * pin));
 }
 
-/* Write value to GPIO pin */
+/*
+ * Write value to GPIO pin
+ */
 void GPIO_WritePin(GPIO_TypeDef *port, uint8_t pin, uint8_t value)
 {
-    // Implementation will be added later
+    if(value)
+        port->BSRR = (1 << pin);
+    else
+        port->BSRR = (1 << (pin + 16));
 }
 
-/* Read value from GPIO pin */
+/*
+ * Read value from GPIO pin
+ */
 uint8_t GPIO_ReadPin(GPIO_TypeDef *port, uint8_t pin)
 {
-    return 0;
+    return (port->IDR >> pin) & 0x1;
 }
 
-/* Toggle GPIO pin */
+/*
+ * Toggle GPIO pin
+ */
 void GPIO_TogglePin(GPIO_TypeDef *port, uint8_t pin)
 {
-    // Implementation will be added later
+    port->ODR ^= (1 << pin);
 }
