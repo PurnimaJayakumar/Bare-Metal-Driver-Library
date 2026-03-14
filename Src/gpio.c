@@ -1,7 +1,5 @@
 #include "gpio.h"
-/*
- * Enable GPIO peripheral clock
- */
+
 void GPIO_EnableClock(GPIO_TypeDef *port)
 {
     if(port == GPIOA)
@@ -15,9 +13,7 @@ void GPIO_EnableClock(GPIO_TypeDef *port)
   else if(port == GPIOE)
         RCC->AHB2ENR |= RCC_AHB2ENR_GPIOEEN;
 }
-/*
- * Initialize GPIO pin
- */
+
 void GPIO_Init(GPIO_TypeDef *port,
                uint8_t pin,
                uint8_t mode,
@@ -38,9 +34,7 @@ void GPIO_Init(GPIO_TypeDef *port,
     port->PUPDR &= ~(3 << (2 * pin));
     port->PUPDR |= (pull << (2 * pin));
 }
-/*
- * Write value to GPIO pin
- */
+
 void GPIO_WritePin(GPIO_TypeDef *port, uint8_t pin, uint8_t value)
 {
     if(value)
@@ -48,16 +42,12 @@ void GPIO_WritePin(GPIO_TypeDef *port, uint8_t pin, uint8_t value)
     else
         port->BSRR = (1 << (pin + 16));    // Reset pin
 }
-/*
- * Read value from GPIO pin
- */
+
 uint8_t GPIO_ReadPin(GPIO_TypeDef *port, uint8_t pin)
 {
     return (port->IDR >> pin) & 0x01;
 }
-/*
- * Toggle GPIO pin
- */
+
 void GPIO_TogglePin(GPIO_TypeDef *port, uint8_t pin)
 {
     port->ODR ^= (1 << pin);
