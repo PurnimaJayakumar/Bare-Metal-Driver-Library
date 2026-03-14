@@ -25,7 +25,10 @@
 #define GPIO_SPEED_HIGH      2
 #define GPIO_SPEED_VERYHIGH  3
 
+
 /* Function Prototypes */
+
+void GPIO_EnableClock(GPIO_TypeDef *port);
 
 void GPIO_Init(GPIO_TypeDef *port,
                uint8_t pin,
