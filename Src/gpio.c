@@ -14,12 +14,7 @@ void GPIO_EnableClock(GPIO_TypeDef *port)
         RCC->AHB2ENR |= RCC_AHB2ENR_GPIOEEN;
 }
 
-void GPIO_Init(GPIO_TypeDef *port,
-               uint8_t pin,
-               uint8_t mode,
-               uint8_t otype,
-               uint8_t pull,
-               uint8_t speed)
+void GPIO_Init(GPIO_TypeDef *port, uint8_t pin, uint8_t mode, uint8_t otype, uint8_t pull, uint8_t speed)
 {
  /* Configure pin mode */
     port->MODER &= ~(3 << (2 * pin));
