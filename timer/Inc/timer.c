@@ -1,4 +1,4 @@
-#include "timer.h"
+#include "ti_mer.h"
 
 /* BASIC TIMER CONFIGURATION */
 void timer_basic_init(TIM_TypeDef *TIMx, uint32_t prescaler, uint32_t arr)
