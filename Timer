@@ -1,0 +1,12 @@
+STM32 Bare-Metal Timer Driver
+
+Features:
+- Basic timer initialization
+- Prescaler and ARR configuration
+- Periodic interrupts
+- PWM generation
+
+Target MCU:
+STM32F103C8T6
+
+Built using CMSIS register-level programming (HAL disabled).
