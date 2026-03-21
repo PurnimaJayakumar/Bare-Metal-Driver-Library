@@ -1,1 +1,15 @@
 
+#include "ti_mer.h"
+
+int main(void)
+{
+    Timer_Config_t config = {15, 999}; // PWM base
+
+    Timer_PWM_Init(TIM3, &config);
+
+    Timer_PWM_SetDuty(TIM3, 50); // 50%
+
+    Timer_Start(TIM3);
+
+    while(1);
+}
