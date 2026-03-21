@@ -3,17 +3,27 @@
 
 #include "stm32f1xx.h"
 
+/* Timer Configuration Structure */
+typedef struct
+{
+    uint16_t prescaler;
+    uint16_t arr;
+} Timer_Config_t;
+
 /* Basic Timer Configuration */
-void timer_basic_init(TIM_TypeDef *TIMx, uint16_t prescaler, uint16_t arr);
+void Timer_Init(TIM_TypeDef *TIMx, Timer_Config_t *config);
 
-/* Start and Stop */
-void timer_start(TIM_TypeDef *TIMx);
-void timer_stop(TIM_TypeDef *TIMx);
+/* Start / Stop / Reset */
+void Timer_Start(TIM_TypeDef *TIMx);
+void Timer_Stop(TIM_TypeDef *TIMx);
+void Timer_Reset(TIM_TypeDef *TIMx);
 
-/* Enable Periodic Interrupt */
-void timer_enable_interrupt(TIM_TypeDef *TIMx);
+/* Interrupt Handling */
+void Timer_EnableInterrupt(TIM_TypeDef *TIMx);
+void Timer_SetCallback(void (*callback)(void));
 
 /* PWM Configuration */
-void timer_pwm_init(TIM_TypeDef *TIMx, uint16_t prescaler, uint16_t arr, uint16_t duty);
+void Timer_PWM_Init(TIM_TypeDef *TIMx, Timer_Config_t *config);
+void Timer_PWM_SetDuty(TIM_TypeDef *TIMx, uint16_t duty);
 
 #endif
