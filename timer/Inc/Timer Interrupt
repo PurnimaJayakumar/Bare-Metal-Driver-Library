@@ -1,1 +1,21 @@
 
+#include "ti_mer.h"
+#include "gpio.h"
+
+void led_callback(void)
+{
+    GPIO_Toggle(GPIOA, 5);
+}
+
+int main(void)
+{
+    Timer_Config_t config = {1599, 9999}; // 1 sec
+
+    Timer_Init(TIM2, &config);
+    Timer_SetCallback(led_callback);
+    Timer_EnableInterrupt(TIM2);
+
+    Timer_Start(TIM2);
+
+    while(1);
+}
